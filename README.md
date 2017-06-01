@@ -23,6 +23,12 @@ Then configure and register the provider:-
                                  'request_headers => ['User-Agent' => 'MyApp/1.0', ...]]]
     );
 
+Configuration for all but the `request_headers` parameter may be alternatively
+achieved through the use of environment variables:-
+
+    export HUB_CLIENT_USERNAME=my-user
+    export HUB_CLIENT_PASSWORD=my-passwd
+    export HUB_CLIENT_URL=http://hub.example.com
 
 [perinatologie/hub-client-php]: <https://github.com/perinatologie/hub-client-php>
   "perinatologie/hub-client-php at GitHub"
