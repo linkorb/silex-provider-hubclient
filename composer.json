@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "perinatologie/hub-client-php": "^1.7",
+        "perinatologie/hub-client-php": "^1.8",
         "pimple/pimple": "^3.0"
     },
     "autoload": {

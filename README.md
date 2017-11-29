@@ -1,7 +1,10 @@
 # linkorb/silex-provider-hubclient
 
-Provides `Hub\Client\V3\HubV3Client` from [perinatologie/hub-client-php][] as a
-service named `hub_client.service`.
+Provides two services from [perinatologie/hub-client-php][]:-
+
+-  `ApiClientFactory` as a service named `hub_client.factory` which can create
+   instances of the HubV3Client and HubV4Client
+- `HubV3Client` as a service named `hub_client.service`
 
 
 ## Install
@@ -17,18 +20,15 @@ Then configure and register the provider:-
     ...
     $app->register(
         new HubClientProvider,
-        ['hub_client.config' => ['username' => 'my-user',
-                                 'password' => 'my-passwd',
-                                 'url' => 'http://hub.example.com'
-                                 'request_headers => ['User-Agent' => 'MyApp/1.0', ...]]]
+        ['hub_client.url' => getenv('HUB_CLIENT_URL'),
+        // if you want to use the factory to create a HubV4Client then add the
+        // url of the UserBase Json Web Token authentication endpoint
+        'hub_client.userbase_url' = getenv('HUB_CLIENT_USERBASE_URL'),
+        // add these parameters if you want to directly create the HubV3Client
+        // with a fixed set of credentials
+        'hub_client.username' = getenv('HUB_CLIENT_USERNAME'),
+        'hub_client.password' = getenv('HUB_CLIENT_PASSWORD')]
     );
-
-Configuration for all but the `request_headers` parameter may be alternatively
-achieved through the use of environment variables:-
-
-    export HUB_CLIENT_USERNAME=my-user
-    export HUB_CLIENT_PASSWORD=my-passwd
-    export HUB_CLIENT_URL=http://hub.example.com
 
 [perinatologie/hub-client-php]: <https://github.com/perinatologie/hub-client-php>
   "perinatologie/hub-client-php at GitHub"
